@@ -1,6 +1,6 @@
-import Head from 'next/head'
+import Head from "next/head";
 
-export default function Home() {
+export default function Home(props) {
   return (
     <div className="container">
       <Head>
@@ -13,9 +13,10 @@ export default function Home() {
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
 
-        <p className="description">
-          Get started by editing <code>pages/index.js</code>
-        </p>
+        <div
+          className="description"
+          dangerouslySetInnerHTML={{ __html: props.content.Home_Body.Body__c }}
+        ></div>
 
         <div className="grid">
           <a href="https://nextjs.org/docs" className="card">
@@ -54,7 +55,7 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{' '}
+          Powered by{" "}
           <img src="/vercel.svg" alt="Vercel Logo" className="logo" />
         </a>
       </footer>
@@ -205,5 +206,18 @@ export default function Home() {
         }
       `}</style>
     </div>
-  )
+  );
+}
+
+const CONTENT_HOST = `https://cloudanswerscms-developer-edition.na150.force.com`;
+const CONTENT_API = CONTENT_HOST + `/services/apexrest/v1/content/.json`;
+
+export async function getStaticProps() {
+  const res = await fetch(CONTENT_API);
+  const content = await res.json();
+  return {
+    props: {
+      content,
+    },
+  };
 }
