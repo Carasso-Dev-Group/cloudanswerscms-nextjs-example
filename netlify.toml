@@ -1,4 +1,6 @@
 [build]
-  command = "npm run build"
+  command = "npm run build && cp _redirects out"
   publish = "out"
 
+[[plugins]]
+  package = "netlify-plugin-cache-nextjs"
