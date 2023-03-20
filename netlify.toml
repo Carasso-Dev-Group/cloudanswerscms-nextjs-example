@@ -1,6 +1,0 @@
-[build]
-  command = "npm run build && cp _redirects public"
-  publish = "public"
-
-[[plugins]]
-  package = "netlify-plugin-cache-nextjs"
